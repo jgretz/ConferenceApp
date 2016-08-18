@@ -1,22 +1,15 @@
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Provider } from 'react-redux';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-});
+import configureStore from './configureStore';
+import App from './components/app';
 
-export default class Host extends Component {
-  componentWillMount() {
-  }
-
+export default class Host extends Component { // eslint-disable-line
   render() {
     return (
-      <View style={styles.container} />
+      <Provider store={configureStore()}>
+        <App />
+      </Provider>
     );
   }
 }
