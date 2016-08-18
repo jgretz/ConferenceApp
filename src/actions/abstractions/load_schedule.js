@@ -14,37 +14,40 @@ export const loadSchedule = () =>
 
       transformResponse: [(data) => {
         const $ = cheerio.load(data);
+        const dayMap = {
+          Thursday: '08/17/16',
+          Friday: '08/18/16',
+          Saturday: '08/19/16',
+        };
 
-        const schedule = [];
+        const sessions = [];
         $('.Day-detail').each((i, dayDetail) => {
           const dayTag = $(dayDetail);
 
-          const sessions = [];
           dayTag.find('.stage-details').each((j, stageDetail) => {
             const stageTag = $(stageDetail);
 
             stageTag.find('.session-detail').each((k, sessionDetail) => {
               const sessionTag = $(sessionDetail);
               const range = sessionTag.find('dt').text().split(',')[0].split(' - ');
+              const day = dayTag.find('.day-name').text();
 
               sessions.push({
+                id: sessionTag.attr('id'),
                 stage: stageTag.find('.stage-name').text(),
                 title: sessionTag.find('h3').text(),
                 presenter: sessionTag.find('h4').text(),
                 description: sessionTag.find('p').text(),
+                day,
                 start: range[0],
                 end: range[1],
+                date: `${dayMap[day]} ${range[0]}`,
               });
             });
           });
-
-          schedule.push({
-            name: dayTag.find('.day-name').text(),
-            sessions,
-          });
         });
 
-        return schedule;
+        return sessions;
       }],
     }).then((response) => {
       dispatch({ type: LOAD_SCHEDULE_SUCCESS, payload: response });
