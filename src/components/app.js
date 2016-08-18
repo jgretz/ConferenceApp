@@ -173,7 +173,7 @@ class App extends Component {
       <TouchableHighlight onPress={this.onPress.bind(this, data)}>
         <View style={styles.row}>
           <Text style={styles.rowTitle}>{data.title}</Text>
-          <Text style={styles.rowPresenter}>{data.presenter}</Text>
+          <Text style={styles.rowPresenter}>{data.presenter} - {data.stage}</Text>
         </View>
       </TouchableHighlight>
     );
