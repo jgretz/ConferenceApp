@@ -15,9 +15,9 @@ export const loadSchedule = () =>
       transformResponse: [(data) => {
         const $ = cheerio.load(data);
         const dayMap = {
-          Thursday: '08/17/16',
-          Friday: '08/18/16',
-          Saturday: '08/19/16',
+          Thursday: '08/18/16',
+          Friday: '08/19/16',
+          Saturday: '08/20/16',
         };
 
         const sessions = [];
