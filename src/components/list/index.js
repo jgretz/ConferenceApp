@@ -1,9 +1,6 @@
 import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
-import {
-  StyleSheet, ListView, RecyclerViewBackedScrollView,
-  View, TouchableHighlight, Text,
-} from 'react-native';
+import { StyleSheet, ListView, RecyclerViewBackedScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import autobind from 'class-autobind';
 
