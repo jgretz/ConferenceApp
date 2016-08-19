@@ -100,6 +100,7 @@ class DetailModalClass extends Component {
         transparent
         animationType="fade"
         visible={this.state.modalShown}
+        onRequestClose={close}
       >
         {renderContent()}
       </Modal>

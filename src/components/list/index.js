@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
-import { StyleSheet, ListView, RecyclerViewBackedScrollView } from 'react-native';
+import { StyleSheet, ListView, RecyclerViewBackedScrollView, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import autobind from 'class-autobind';
 
@@ -79,14 +79,29 @@ class List extends Component {
     return <Row data={data} />;
   }
 
+  renderScrollComponent(props) {
+    return <RecyclerViewBackedScrollView {...props} />;
+  }
+
   render() {
+    if (Platform.OS === 'android') {
+      return (
+        <ListView
+          style={styles.list}
+          dataSource={this.state.dataSource}
+          renderSectionHeader={this.renderHeader}
+          renderRow={this.renderRow}
+        />
+      );
+    }
+
     return (
       <ListView
         style={styles.list}
         dataSource={this.state.dataSource}
         renderSectionHeader={this.renderHeader}
         renderRow={this.renderRow}
-        renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />} // eslint-disable-line
+        renderScrollComponent={this.renderScrollComponent}
       />
     );
   }

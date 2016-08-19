@@ -63,6 +63,7 @@ class MapClass extends Component {
         transparent
         animationType="fade"
         visible={this.state.modalShown}
+        onRequestClose={close}
       >
         <View style={styles.modalContainer}>
           <Image
