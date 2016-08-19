@@ -1,6 +1,7 @@
-import _ from 'lodash';
 import axios from 'axios';
 import cheerio from 'cheerio-without-node-native';
+import moment from 'moment';
+
 import { logError } from '../../support';
 
 export const LOAD_SCHEDULE_SUCCESS = 'LOAD_SCHEDULE_SUCCESS';
@@ -31,6 +32,7 @@ export const loadSchedule = () =>
               const sessionTag = $(sessionDetail);
               const range = sessionTag.find('dt').text().split(',')[0].split(' - ');
               const day = dayTag.find('.day-name').text();
+              const date = `${dayMap[day]} ${range[0]}`;
 
               sessions.push({
                 id: sessionTag.attr('id'),
@@ -39,9 +41,10 @@ export const loadSchedule = () =>
                 presenter: sessionTag.find('h4').text(),
                 description: sessionTag.find('p').text(),
                 day,
+                date,
                 start: range[0],
                 end: range[1],
-                date: `${dayMap[day]} ${range[0]}`,
+                moment: moment(date, 'MM/DD/YY hh:mm a'),
               });
             });
           });
