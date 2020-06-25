@@ -6,7 +6,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
-    "axios": "^0.13.1",
+    "axios": "^0.19.2",
     "cheerio-without-node-native": "^0.20.1",
     "class-autobind": "0.1.4",
     "humanize-plus": "1.8.2",
